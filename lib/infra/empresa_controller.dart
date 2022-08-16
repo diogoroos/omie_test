@@ -1,11 +1,9 @@
-import 'package:omie_test/company_repository.dart';
-import 'package:omie_test/dioClient.dart';
-import 'package:omie_test/dio_client.dart';
+import 'package:omie_test/infra/empresa_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmpresaController {
   EmpresaController(this.repository);
-  final CompaniesRepository repository;
+  final EmpresasRepository repository;
 
   Future<void> addToken(String token, String refreshToken) async {
     final sp = await SharedPreferences.getInstance();
@@ -38,8 +36,6 @@ class EmpresaController {
     sp.setString("lastcompany", 'asdasd');
     var response = await repository.getTokenCompany();
     addToken(response.data['token'], response.data['refresh_token']);
-
-    DioClientNew().refreshTokenDio(response.data['token']);
   }
 
   Future<String> loadCompanies() async {

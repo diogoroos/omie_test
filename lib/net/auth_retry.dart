@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:omie_test/main.dart';
-import 'package:omie_test/shared_prefs.dart';
+import 'package:omie_test/db/shared_prefs.dart';
 
 class AuthInterceptor extends InterceptorsWrapper {
   final Dio loggedDio; //for logged

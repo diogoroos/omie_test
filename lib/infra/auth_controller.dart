@@ -1,6 +1,5 @@
-import 'package:omie_test/auth_repository.dart';
-import 'package:omie_test/dioClient.dart';
-import 'package:omie_test/dio_client.dart';
+import 'package:omie_test/infra/auth_repository.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IAuthController {
@@ -80,7 +79,6 @@ class AuthController implements IAuthController {
     if (refToken != null) {
       await sp.setString('refresh_token', refToken);
     }
-    DioClientNew().refreshTokenDio(accessToken);
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:omie_test/auth_retry.dart';
+import 'package:omie_test/net/auth_retry.dart';
 import 'package:omie_test/main.dart';
-import 'package:omie_test/shared_prefs.dart';
+import 'package:omie_test/db/shared_prefs.dart';
 
 class SimpleDio {
   late Dio _dio;
