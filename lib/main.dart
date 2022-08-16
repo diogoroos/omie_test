@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 
   static String appFlavor = "https://appdsv.omie.com.br/";
   static String email = "diogo.melo@omie.com.br";
-  //static String senha = "753dRm12@";
   static String senha = "TesteApple123";
 
   final String title;
