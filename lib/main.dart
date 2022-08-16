@@ -2,12 +2,12 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:omie_test/auth_controller.dart';
-import 'package:omie_test/auth_repository.dart';
-import 'package:omie_test/company_repository.dart';
-import 'package:omie_test/empresa_controller.dart';
-import 'package:omie_test/shared_prefs.dart';
-import 'package:omie_test/simpleDio.dart';
+import 'package:omie_test/infra/auth_controller.dart';
+import 'package:omie_test/infra/auth_repository.dart';
+import 'package:omie_test/infra/empresa_repository.dart';
+import 'package:omie_test/infra/empresa_controller.dart';
+import 'package:omie_test/db/shared_prefs.dart';
+import 'package:omie_test/net/simple_dio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       var retMe = await ac.buscaDadosUsuario();
       print('\nMe: $retMe');
 
-      CompaniesRepository cr = CompaniesRepository();
+      EmpresasRepository cr = EmpresasRepository();
       EmpresaController ec = EmpresaController(cr);
       try {
         var retApps = await ec.loadCompanies();
