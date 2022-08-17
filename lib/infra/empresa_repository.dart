@@ -12,7 +12,7 @@ class EmpresasRepository implements IEmpresaRepository {
   Future<Response> getCompanies() async {
     final Response response = await SimpleDio.getInstance().instance.get(
           //var ret = await dioClient!.get(
-          'api/portal/apps',
+          'api/portal/apps/',
         );
     return response;
   }

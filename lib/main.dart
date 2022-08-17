@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:omie_test/infra/auth_controller.dart';
 import 'package:omie_test/infra/auth_repository.dart';
@@ -32,8 +33,8 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   static String appFlavor = "https://appdsv.omie.com.br/";
-  static String email = "@omie.com.br";
-  static String senha = "";
+  static String email = "diogo.melo@omie.com.br";
+  static String senha = "TesteApple123";
 
   final String title;
 
@@ -47,19 +48,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController tec = TextEditingController();
 
+  Future<void> superSimples() async {
+    // Este é exatamente o mesmo código gerado pelo postman (opção dart)
+    var headers = {
+      'Con': '',
+      'Content-Type': '"x-www-form-urlenc2oded"',
+      'Authorization':
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjA3NzY4MTEsInVpZCI6IjAzbjgwZiIsInV1aWQiOiI3NzRDQUY0Ri1ERjk0LTQ1NzctOENFMC0yMkI4NDM5OUY4RjYiLCJlbWFpbCI6ImRpb2dvLm1lbG9Ab21pZS5jb20uYnIifQ.RFw2_uBtNKJJu4c-7-uXSkaMbf69i1wIlax0ul-hiEg'
+    };
+    var request = http.Request(
+        'GET', Uri.parse('https://appdsv.omie.com.br/api/portal/apps/'));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print('erro http');
+      print(response.reasonPhrase);
+    }
+  }
+
   Future<void> _start() async {
-    await testeSimplesComDio();
-    print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
-    print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x');
-    //
-    // await testeSimples();
+    //await superSimples();
+    //print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
+
+    //await testeComDio();
+    // print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x');
+
+    //await testeSimpleDio();
     // print('-------------------------------');
     // print('-------------------------------');
-    //await ac.fazLogin('diogo.melo@omie.com.br', '753dRm12@', tec.text);
 
     await testeCompleto();
-    print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
-    print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
+    // print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
+    // print('-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x-x-x-x-x-x-x-x-x');
   }
 
   Future<void> testeCompleto() async {
@@ -92,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> testeSimplesComDio() async {
+  Future<void> testeComDio() async {
     var dio = Dio();
     try {
       dio.options.headers['User-Agent'] = ua;
@@ -120,8 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print(me);
 
       print('      >>>>>>>   APPS COMPLETO');
-      var myApps =
-          await dio.get('${MyHomePage.appFlavor}api/portal/apps?app_type=OMIE');
+      var myApps = await dio.get('${MyHomePage.appFlavor}api/portal/apps/');
       print("\n myApps");
       print(myApps);
 
@@ -135,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> testeSimples() async {
+  Future<void> testeSimpleDio() async {
     try {
       SimpleDio.getInstance().instance.options.headers['User-Agent'] = ua;
 
@@ -167,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print('      >>>>>>>   APPS SIMPLES');
       var myApps = await SimpleDio.getInstance()
           .instance
-          .get('${MyHomePage.appFlavor}api/portal/apps?app_type=OMIE');
+          .get('${MyHomePage.appFlavor}api/portal/apps/');
       print("\n myApps");
       print(myApps);
 
